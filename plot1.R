@@ -3,8 +3,10 @@
 library(dplyr)
 library(lubridate)
 
+setwd('D:\\ExData_Plotting1')
+
 # Read file
-df <- read.csv(unzip("C:/Users/georgetheologou/Desktop/Exploratory Data Analysis/assignment1/exdata-data-household_power_consumption.zip"), sep=';',stringsAsFactors = FALSE)%>%
+df <- read.csv(unzip("exdata-data-household_power_consumption.zip"), sep=';',stringsAsFactors = FALSE)%>%
   tbl_df()
 
 # Convert Global active power to numeric
