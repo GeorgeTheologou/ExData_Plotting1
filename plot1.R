@@ -16,7 +16,7 @@ df["Global_active_power"]<-as.numeric(df$Global_active_power)
 df["Date"]<- dmy(df$Date)
 
 # Keep only the 1/2 to 2/2 date range
-df <- subset(df, Date >= as.POSIXct("2007-02-01") & Date <= as.POSIXct("2007-02-02"))
+df <- subset(df, Date >= as.POSIXct("2007-02-01") & Date < as.POSIXct("2007-02-03"))
 
 # Create plot 1
 hist(df$Global_active_power, 
@@ -26,7 +26,7 @@ hist(df$Global_active_power,
      xlab = "Global Active Power (kilowatts)")
 
 # Save plot as PNG file with a width of 480 pixels and a height of 480 pixels
-dev.copy(png, file = "C:/Users/georgetheologou/Desktop/Exploratory Data Analysis/assignment1/Plot1.png",
+dev.copy(png, file = "plot1.png",
          width = 480,
          height = 480,
          units = "px"        
