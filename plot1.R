@@ -8,6 +8,7 @@ setwd('D:\\ExData_Plotting1')
 # Read file
 df <- read.csv(unzip("exdata-data-household_power_consumption.zip"), sep=';',stringsAsFactors = FALSE)%>%
   tbl_df()
+df[df=="?"] <- NA
 
 # Convert Global active power to numeric
 df["Global_active_power"]<-as.numeric(df$Global_active_power)

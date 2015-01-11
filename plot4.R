@@ -3,9 +3,12 @@
 library(dplyr)
 library(lubridate)
 
+setwd('D:\\ExData_Plotting1')
+
 # Read file
-df <- read.csv(unzip("C:/Users/georgetheologou/Desktop/Exploratory Data Analysis/assignment1/exdata-data-household_power_consumption.zip"), sep=';',stringsAsFactors = FALSE)%>%
+df <- read.csv(unzip("exdata-data-household_power_consumption.zip"), sep=';',stringsAsFactors = FALSE)%>%
   tbl_df()
+df[df=="?"] <- NA
 
 # Convert char to numeric
 df["Global_active_power"]<-as.numeric(df$Global_active_power)
@@ -19,7 +22,7 @@ df["Sub_metering_3"]<-as.numeric(df$Sub_metering_3)
 df["Date"]<- dmy_hms(paste(df$Date,df$Time))
 
 # Keep only the 1/2 to 2/2 date range
-df <- subset(df, Date >= as.POSIXct("2007-02-01") & Date <= as.POSIXct("2007-02-02"))
+df <- subset(df, Date >= as.POSIXct("2007-02-01") & Date < as.POSIXct("2007-02-03"))
 
 # Combine four plots using par() function with two rows and two columns
 par(mfrow=c(2,2))
@@ -46,7 +49,7 @@ plot(df$Date,df$Sub_metering_1,
      type = "l")
 lines(df$Date,df$Sub_metering_2,type="l",col="red")
 lines(df$Date,df$Sub_metering_3,type="l",col="blue")
-legend('topright', legend=c("Sub_metering_1", "Sub_metering_2","Sub_metering_3"), col=c("black","red","blue"), lty=c(1,1,1),bty="n",cex=0.5,lw)
+legend('topright', legend=c("Sub_metering_1", "Sub_metering_2","Sub_metering_3"), col=c("black","red","blue"), cex=0.8, lty=c(1,1,1),bty="n",lw)
 
 # create 4th plot
 plot(strptime(df$Date, "%Y-%m-%d %H:%M:%S"),df$Global_reactive_power,
@@ -56,7 +59,7 @@ plot(strptime(df$Date, "%Y-%m-%d %H:%M:%S"),df$Global_reactive_power,
      type = "l")
 
 # Save plot as PNG file with a width of 480 pixels and a height of 480 pixels
-dev.copy(png, file = "C:/Users/georgetheologou/Desktop/Exploratory Data Analysis/assignment1/Plot4.png",
+dev.copy(png, file = "plot4.png",
          width = 480,
          height = 480,
          units = "px") ## Copy my plot to a PNG file
